@@ -1,5 +1,6 @@
 import React from 'react';
 import './navbar.css';
+import InStock from "../../asserts/check.png";
 
 const NavbarEdited = () => {
   return (
@@ -28,12 +29,7 @@ const NavbarEdited = () => {
       </div>
 
       <div className='nav-option' href="#">
-        <svg className='icon' width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 7.81818L12.9231 1L18.8846 4.40909M1 7.81818V19.1818L12.9231 26M1 7.81818L6.96154 11.2273M24.8462 7.81818L12.9231 14.6364M24.8462 7.81818V19.1818L12.9231 26M24.8462 7.81818L18.8846 4.40909M12.9231 14.6364V26M12.9231 14.6364L6.96154 11.2273M6.96154 11.2273L18.8846 4.40909" stroke="white"/>
-          <ellipse cx="24.8462" cy="19.1818" rx="7.15385" ry="6.81818" fill="white"/>
-          <path d="M22.4615 19.1818L24.8462 21.4545L29.6154 16.9091" stroke="#264ECA"/>
-
-        </svg>
+        <img src={InStock} alt="Last Option Icon" className="icon" />
         <span className='nav-text'>In stock</span>
       </div>
 

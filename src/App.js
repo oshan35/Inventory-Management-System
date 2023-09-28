@@ -2,11 +2,14 @@ import './App.css';
 import NavbarEdited from './components/navbar/nav';
 import PageHedder from './components/hedder/hedder';
 import LoginPage from './Pages/LoginPage/loginPage';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Revenue from './Pages/Dashboard/Test';
+import Test from './Pages/Dashboard/Test'
 
 function App() {
   return (
     <div className="App">
-      <LoginPage/>
+      <Test/>
     </div>
   );
 }

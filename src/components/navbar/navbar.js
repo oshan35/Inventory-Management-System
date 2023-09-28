@@ -1,4 +1,5 @@
 import React from 'react';
+import InStock from "../../asserts/check.png";
 import "./navbar.css";
 
 const Navbar = () =>{
@@ -36,13 +37,15 @@ const Navbar = () =>{
                 </div>
 
                 <div className='nav-option' href="#">
-                    <svg className='icon'>
+                    
+                    {/* <svg className='icon'>
                         <path d="M1 7.81818L12.9231 1L18.8846 4.40909M1 7.81818V19.1818L12.9231 26M1 7.81818L6.96154 11.2273M24.8462 7.81818L12.9231 14.6364M24.8462 7.81818V19.1818L12.9231 26M24.8462 7.81818L18.8846 4.40909M12.9231 14.6364V26M12.9231 14.6364L6.96154 11.2273M6.96154 11.2273L18.8846 4.40909" stroke="white"/>
                         <circle cx="16" cy="16" r="14" fill="white" stroke="#264ECA" stroke-width="2" />
     
                         <path d="M12 17.3L9.7 15l-1.4 1.4 3 3 6.3-6.3-1.4-1.4L12 17.3z" fill="none" stroke="#264ECA" stroke-width="2" />
                     </svg>
-                    <p className='nav-text'>In stock</p>
+                    <p className='nav-text'>In stock</p> */}
+                    <img src={InStock} alt="Last Option Icon" className="icon" />
                 </div>
             </div>
         </>

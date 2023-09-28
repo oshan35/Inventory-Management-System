@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    height: 100vh; 
+}
+
+.nav-dash {
+    display: flex;
+    flex-direction: column;
+    width: 90px;
+}
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    float: right;
+}
+
+.data-cards{
+    background: blue;
+    height: 15%;
+
+    
+}
+
+.chars{
+    display: flex;
+    height: 85%;
+}
+
+.charts-card{
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+}
+
