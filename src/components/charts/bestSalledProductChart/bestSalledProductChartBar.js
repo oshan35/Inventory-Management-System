@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ApexCharts from "react-apexcharts";
 import { fetchChannelData } from "../../../api";
+import { Box } from "@mui/material";
 
 export default function BestSelledProductChartBar() {
   const [channelData, setChannelData] = useState([]);
@@ -10,6 +11,7 @@ export default function BestSelledProductChartBar() {
       try {
         const response = await fetchChannelData();
         console.log(response.data);
+        console.log("Hi");
         setChannelData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -20,18 +22,6 @@ export default function BestSelledProductChartBar() {
   }, []);
 
     console.log(channelData);
-
-  // useEffect(() => {
-    // setChannelData([
-    //   {
-    //     data: [3400, 3500, 3000, 4000, 4699],
-    //   },
-    // ]);
-
-  //   return () => {
-  //     setChannelData([]);
-  //   };
-  // }, []);
 
   const options3 = {
     colors: ["#5A4FCF", "#FFA500", "#C53500", "#FFBF00", "#FF3659"],
@@ -84,9 +74,11 @@ export default function BestSelledProductChartBar() {
         options={options3}
         series={channelData}
         type="bar"
-        width="100%"
-        height={320}
+        width="90%"
+        height={260}
+        sx={{ padding: 0, margin: 0 }}
       />
     </div>
+
   );
 }

@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from "react";
 import ApexCharts from "react-apexcharts";
+import { fetchCostRevernewData } from "../../../api";
 
 export default function RevenueCostChart() {
-  const [channelData, setChannelData] = useState([]);
+  const [revenueCostData, setRevenueCostData] = useState([]);
 
-  useEffect(() => {
-    setChannelData([
-      {
-        name: "Revenue",
-        type: "column",
-        data: [141, 250, 260, 270, 300, 330, 360, 400, 420, 1000, 1300, 1600],
-      },
-      {
-        name: "Cost",
-        type: "column",
-        data: [341, 350, 460, 370, 400, 140, 150, 120, 220, 700, 300, 600],
-      },
-    ]);
+  useEffect(() => async () => {
+      try {
+        const response = await fetchCostRevernewData();
+        console.log(response.data);
+        setRevenueCostData(response.data);
+      } catch (error) {
+        console.log('Error fetching cost review data');
+        
+      }
 
-    return () => {
-      setChannelData([]);
-    };
   }, []);
 
   let totalArray = [];
-  const total = channelData.forEach((value) => {
+  const total = revenueCostData.forEach((value) => {
     const data = value.data;
     if (totalArray.length === 0) totalArray = [...data];
     else {
@@ -89,10 +83,10 @@ export default function RevenueCostChart() {
     <div>
       <ApexCharts
         options={options3}
-        series={channelData}
+        series={revenueCostData}
         type="bar"
         width="100%"
-        height={320}
+        height={250}
       />
     </div>
   );

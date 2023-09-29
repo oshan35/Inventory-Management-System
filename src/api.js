@@ -12,3 +12,10 @@ export const fetchChannelData = () => {
 };
 
 
+export const fetchTopFiveProducts = () => {
+    return api.get('/topFive');
+}
+
+export const fetchCostRevernewData = () => {
+    return api.get("/api/revenue-cost-data");
+}
