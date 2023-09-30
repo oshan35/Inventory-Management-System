@@ -4,12 +4,12 @@ import PageHedder from './components/hedder/hedder';
 import LoginPage from './Pages/LoginPage/loginPage';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Revenue from './Pages/Dashboard/Dashboard';
-import Test from './Pages/Dashboard/Dashboard'
+import InventoryPage from './Pages/InventoryPage/inventory';
 
 function App() {
   return (
     <div className="App">
-      <Test/>
+      <Dashboard/>
     </div>
   );
 }

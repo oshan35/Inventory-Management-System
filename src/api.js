@@ -19,3 +19,9 @@ export const fetchTopFiveProducts = () => {
 export const fetchCostRevernewData = () => {
     return api.get("/api/revenue-cost-data");
 }
+
+export const fetchSearchNearestData = (query) => {
+  return axios.get('api/nearest', {
+    params: { query }
+  });
+};
