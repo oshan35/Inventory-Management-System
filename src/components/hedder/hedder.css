@@ -1,17 +1,15 @@
 .hedder{
     width: 100%;
-    height: 91px;
+    height: 100px;
     background: var(--true-white, #FFF);
+    display: flex; 
+    justify-content: left; 
 
 }
 
 .nav-icon{
-    /* margin: 30 1384 30 30; */
-    flex-shrink: 0;
-    float: left;
     height: 60px;
     justify-content: center;
-
 }
 
 .name{
@@ -21,24 +19,22 @@
     flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
-
     color: #5F6FFF;
-    text-align: center;
     font-family: 'Magra';
     font-size: 40px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    text-align: right; 
+    
 }
 
 .hedder-icon{
+    width: 50px;
     padding-top: 25px;
     padding-left: 24px;
 }
 
 .company-name{
     padding-top: 19px;
-    padding-left: 87px;
 }
-
-
