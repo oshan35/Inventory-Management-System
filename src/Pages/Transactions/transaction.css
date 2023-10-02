@@ -1,0 +1,50 @@
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+   
+}
+
+.column {
+    display: flex;
+    flex-wrap: wrap;
+   
+}
+
+
+.nav-bar {
+    height: 100vh;
+    box-sizing: border-box;
+    width: 8%;
+}
+
+.transactions-content {
+    background-color: #ffffff;
+    box-sizing: border-box;
+    width: 92%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.transaction-btn{
+    height: 40px;
+    width: 160px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-color: #264ECA;
+}
+
+#delete{
+    background-color: #264ECA;
+}

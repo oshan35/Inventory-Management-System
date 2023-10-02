@@ -1,6 +1,6 @@
 .hedder{
     width: 100%;
-    height: 100px;
+    height: 80px;
     background: var(--true-white, #FFF);
     display: flex; 
     justify-content: left; 
