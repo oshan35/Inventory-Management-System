@@ -1,9 +1,24 @@
 // TransactionModal.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Form, Input } from 'antd';
 
-export default function TransactionModal({ isModalVisible, handleOk, handleCancel }) {
+export default function TransactionModal({ isModalVisible, handleOk, handleCancel, transaction }) {
     const [form] = Form.useForm();
+
+    useEffect(() => {
+        if (transaction) {
+            form.setFieldsValue({
+                orderId: transaction.orderId,
+                productId: transaction.productId,
+                customerName: transaction.customerName,
+                items: transaction.items,
+                total: transaction.total
+            });
+        } else {
+            form.resetFields();
+        }
+    }, [transaction, form]);
+    
 
     return (
         <Modal

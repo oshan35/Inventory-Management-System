@@ -6,10 +6,38 @@ import { Button, Space } from 'antd';
 import TransactionModal from './transactionForm'; 
 import './transaction.css';
 
+const sampleData = [
+    {
+        key: '1',
+        orderId: '123456',
+        productId: 'P12345',
+        customerName: 'John Doe',
+        items: 'Item1, Item2',
+        total: '$200.00'
+    },
+    {
+        key: '2',
+        orderId: '654321',
+        productId: 'P54321',
+        customerName: 'Jane Smith',
+        items: 'Item3, Item4',
+        total: '$300.00'
+    },
+    {
+        key: '3',
+        orderId: '112233',
+        productId: 'P67890',
+        customerName: 'Bob Johnson',
+        items: 'Item5, Item6',
+        total: '$150.00'
+    }
+];
+
 export default function TransactionsPage() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(sampleData);
     const [checkedKeys, setCheckedKeys] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [selectedTransaction, setSelectedTransaction] = useState(null);
 
     const columns = [
         {
@@ -44,8 +72,19 @@ export default function TransactionsPage() {
           dataIndex: 'total',
         },
     ];
+
     const handleCheck = (e, key) => {
-        // ... (handleCheck definition remains the same)
+        const newCheckedKeys = e.target.checked
+            ? [...checkedKeys, key]
+            : checkedKeys.filter(checkedKey => checkedKey !== key);
+        setCheckedKeys(newCheckedKeys);
+    
+        if (e.target.checked) {
+            const selected = data.find(item => item.key === key);
+            setSelectedTransaction(selected);
+        } else {
+            setSelectedTransaction(null);
+        }
     };
 
     const handleCancel = () => {
@@ -66,15 +105,18 @@ export default function TransactionsPage() {
     };
 
     const handleUpdate = () => {
-        // Handle updating checked transactions
-        // ...
+        if (checkedKeys.length === 1) {  // Ensure only one transaction is selected
+            setIsModalVisible(true);
+        } else {
+            alert('Please select exactly one transaction to update.');
+        }
     };
+
 
     const handleOk = (form) => {
         form.validateFields()
             .then(values => {
                 form.resetFields();
-                // Handle form submission, e.g., save transaction
                 console.log('Submitted values:', values);
                 setIsModalVisible(false);
             })
@@ -108,7 +150,9 @@ export default function TransactionsPage() {
                 isModalVisible={isModalVisible}
                 handleOk={handleOk}
                 handleCancel={handleCancel}
+                transaction={selectedTransaction}
             />
+
         </>
     );
 }
