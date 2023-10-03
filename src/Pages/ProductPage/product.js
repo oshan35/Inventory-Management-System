@@ -3,44 +3,14 @@ import { Input, Table, Checkbox } from 'antd';
 import NavbarEdited from "../../components/navbar/nav";
 import PageHedder from "../../components/hedder/hedder";
 import { Button, Space } from 'antd';
-import TransactionModal from './transactionForm'; 
-import './transaction.css';
+import ProductModal from './addProductModel';
 
-const sampleData = [
-    {
-        key: '1',
-        orderId: '123456',
-        productId: 'P12345',
-        transactionDate: '2023-09-21',
-        customerName: 'John Doe',
-        items: 'Item1, Item2',
-        total: '$200.00'
-    },
-    {
-        key: '2',
-        orderId: '654321',
-        productId: 'P54321',
-        transactionDate: '2023-09-21',
-        customerName: 'Jane Smith',
-        items: 'Item3, Item4',
-        total: '$300.00'
-    },
-    {
-        key: '3',
-        orderId: '112233',
-        productId: 'P67890',
-        transactionDate: '2023-09-21',
-        customerName: 'Bob Johnson',
-        items: 'Item5, Item6',
-        total: '$150.00'
-    }
-];
 
-export default function TransactionsPage() {
-    const [data, setData] = useState(sampleData);
+export default function ProductsPage() {
+    const [data, setData] = useState([]);
     const [checkedKeys, setCheckedKeys] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [selectedTransaction, setSelectedTransaction] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const columns = [
         {
@@ -55,29 +25,21 @@ export default function TransactionsPage() {
             width: '5%',
         },
         {
-          title: 'Order ID',
-          dataIndex: 'orderId',
-        },
-        {
           title: 'Product ID',
           dataIndex: 'productId',
         },
         {
-            title: 'Transaction Date',
-            dataIndex: 'transactionDate',
+          title: 'Product Name',
+          dataIndex: 'productName',
         },
         {
-          title: 'Customer Name',
-          dataIndex: 'customerName',
+          title: 'Available Stock',
+          dataIndex: 'availableStock',
         },
         {
-          title: 'Items',
-          dataIndex: 'items',
-        },
-        {
-          title: 'Total',
-          dataIndex: 'total',
-        },
+            title: 'Price',
+            dataIndex: 'price',
+          }
     ];
 
     const handleCheck = (e, key) => {
@@ -88,9 +50,9 @@ export default function TransactionsPage() {
     
         if (e.target.checked) {
             const selected = data.find(item => item.key === key);
-            setSelectedTransaction(selected);
+            setSelectedProduct(selected);
         } else {
-            setSelectedTransaction(null);
+            setSelectedProduct(null);
         }
     };
 
@@ -103,7 +65,7 @@ export default function TransactionsPage() {
     };
 
     const handleAdd = () => {
-        showModal();  // Show the modal when the Add button is clicked
+        showModal(); 
     };
 
     const handleDelete = () => {
@@ -112,7 +74,7 @@ export default function TransactionsPage() {
     };
 
     const handleUpdate = () => {
-        if (checkedKeys.length === 1) {  // Ensure only one transaction is selected
+        if (checkedKeys.length === 1) { 
             setIsModalVisible(true);
         } else {
             alert('Please select exactly one transaction to update.');
@@ -142,9 +104,9 @@ export default function TransactionsPage() {
                     <div className="transactions-content">
                         <div className="row">
                             <div className='button-container'>
-                                <Button className='transaction-btn' onClick={handleAdd}>New Transactions</Button>
-                                <Button type='primary' className='transaction-btn' id="delete" onClick={handleDelete}>Delete Transactions</Button>
-                                <Button className='transaction-btn' onClick={handleUpdate}>Update Transactions</Button>
+                                <Button className='transaction-btn' onClick={handleAdd}>New Product</Button>
+                                <Button type='primary' className='transaction-btn' id="delete" onClick={handleDelete}>Delete Product</Button>
+                                <Button className='transaction-btn' onClick={handleUpdate}>Update Product</Button>
                             </div>
                             <div className='data-area'>
                                 <Table columns={columns} dataSource={data} />
@@ -153,11 +115,11 @@ export default function TransactionsPage() {
                     </div>
                 </div>
             </div>
-            <TransactionModal 
+            <ProductModal 
                 isModalVisible={isModalVisible}
                 handleOk={handleOk}
                 handleCancel={handleCancel}
-                transaction={selectedTransaction}
+                transaction={selectedProduct}
             />
 
         </>
