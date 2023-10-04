@@ -25,3 +25,9 @@ export const fetchSearchNearestData = (query) => {
     params: { query }
   });
 };
+
+export const fetchLogin =(values) => {
+  return axios.post('api/login',{
+    params: {values}
+  })
+}
