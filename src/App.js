@@ -10,6 +10,7 @@ import InventoryPage from './Pages/InventoryPage/inventory';
 import ProductsPage from './Pages/ProductPage/product';
 import LoginPage from './Pages/LoginPage/loginPage';
 import LoginPageEdited from './Pages/LoginPage/loginTest';
+import Admin from './Pages/AdminPage/admin';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="inventories" element={<InventoryPage />} />
         <Route path="transactions" element={<TransactionsPage/>} />  {/* Check this line */}
         <Route path="products" element={<ProductsPage/>} />
+        <Route path="admin" element={<Admin/>}/>
       </Routes>
     </Router>
   );

@@ -1,5 +1,5 @@
 import React from 'react'
-import './hedder.css'
+import './adminHedder.css'
 
 const AdminPageHedder = () => {
     return(
@@ -20,4 +20,4 @@ const AdminPageHedder = () => {
     );
 }
 
-export default PageHedder;
+export default AdminPageHedder;

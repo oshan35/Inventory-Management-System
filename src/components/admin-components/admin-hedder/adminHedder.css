@@ -14,7 +14,7 @@
 
 .name{
     display: flex;
-    width: 240px;
+    width: auto;
     height: 60px;
     flex-direction: column;
     justify-content: center;

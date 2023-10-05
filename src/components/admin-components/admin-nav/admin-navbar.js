@@ -1,8 +1,7 @@
 import React from 'react';
-import './navbar.css';
-import InStock from "../../asserts/check.png";
+import './admin-nav.css';
 
-const NavbarEdited = () => {
+const AdminNavBar = () => {
   return (
     <div className='main-navbar'>
       <div className='nav-option active-nav-option' href="#">
@@ -24,4 +23,4 @@ const NavbarEdited = () => {
   );
 }
 
-export default NavbarEdited;
+export default AdminNavBar;
