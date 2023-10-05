@@ -15,6 +15,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
+
 const LocationPicker = ({ setLocation, setFieldValue }) => {
     
     const map = useMapEvents({
