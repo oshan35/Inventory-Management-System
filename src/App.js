@@ -11,6 +11,9 @@ import ProductsPage from './Pages/ProductPage/product';
 import LoginPage from './Pages/LoginPage/loginPage';
 import LoginPageEdited from './Pages/LoginPage/loginTest';
 import Admin from './Pages/AdminPage/admin';
+import AdminLogin from './Pages/AdminPage/AdminLogin/adminLogin';
+import AddInventory from './Pages/AdminPage/AddInventoryPage/addInventory';
+
 
 function App() {
   return (
@@ -22,6 +25,8 @@ function App() {
         <Route path="transactions" element={<TransactionsPage/>} />  {/* Check this line */}
         <Route path="products" element={<ProductsPage/>} />
         <Route path="admin" element={<Admin/>}/>
+        <Route path="adminLogin" element={<AdminLogin/>}/>
+        <Route path="addInventory" element={<AddInventory/>}/>
       </Routes>
     </Router>
   );

@@ -1,0 +1,13 @@
+@import "leaflet/dist/leaflet.css";
+
+.inventory-form .ant-form-item-control-input {
+    max-width: 300px;
+}
+
+.inventory-form .leaflet-container {
+    margin-top: 10px;
+}
+
+.form-area{
+    width: 80%;
+}
