@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AdminNavBar from '../../../components/admin-components/admin-nav/admin-navbar'
 import AdminPageHedder from '../../../components/admin-components/admin-hedder/adminHedder';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents, useMapEvent } from 'react-leaflet';
 import { Input, Form, InputNumber, Select, Button } from 'antd';
 import L from 'leaflet';
 import './addInventory.css';
@@ -16,14 +16,11 @@ L.Icon.Default.mergeOptions({
 });
 
 
-const LocationPicker = ({ setLocation, setFieldValue }) => {
-    
+const LocationPicker = ({ setLocation, form }) => {
     const map = useMapEvents({
         click: (e) => {
             const newLocation = e.latlng;
             setLocation(newLocation);
-            setFieldValue('location', newLocation); 
-            console.log(newLocation);
         },
     });
     return null; 
@@ -31,13 +28,13 @@ const LocationPicker = ({ setLocation, setFieldValue }) => {
 
 
 export default function AddInventory() {
-    const [location, setLocation] = React.useState(null);
+    const [location, setLocation] = useState({ lat: 51.505, lng: -0.09 });
     const [form] = Form.useForm();
 
     const onFinish = (values) => {
+        values.locationPos = location;
         console.log('Form Values:', values);
         console.log('Selected Location:', location);
-        // Add your logic to add the inventory item to your database/API here
     };
 
 
@@ -53,48 +50,97 @@ export default function AddInventory() {
                         <div className="row">
                             <div className='form-area'>
                                 <h2>Add New Inventory</h2>
-                                <Form 
-                                    name="addInventory" 
-                                    layout="vertical" 
-                                    onFinish={onFinish}
-                                >
-                                    <Form.Item 
-                                        name="productName" 
-                                        label="Product Name" 
-                                        rules={[{ required: true, message: 'Please input the product name!' }]}
+                                <div className="form-map-container"> 
+                                    <Form 
+                                        name="addInventory" 
+                                        layout="vertical" 
+                                        onFinish={onFinish}
+                                        className="left-column"
+                                     
                                     >
-                                        <Input />
-                                    </Form.Item>
-                                    <Form.Item 
-                                        name="quantity" 
-                                        label="Quantity" 
-                                        rules={[{ required: true, message: 'Please input the quantity!' }]}
-                                    >
-                                        <InputNumber min={1} />
-                                    </Form.Item>
-                                    <Form.Item 
-                                        name="location" 
-                                        label="Location" 
-                                        rules={[{ required: true, message: 'Please select a location!' }]}
-                                    >
-                                        <MapContainer 
-                                            center={[6.079635106310293, 80.19188949389012]} 
-                                            zoom={13} 
-                                            style={{ height: '300px', width: '100%' }}
-                                        >
-                                            <TileLayer
-                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                            />
-                                            {location && <Marker position={location} />}
-                                            <LocationPicker setLocation={setLocation} setFieldValue={form.setFieldsValue} />
-                                        </MapContainer>
-                                    </Form.Item>
-                                    <Form.Item>
-                                        <Button type="primary" htmlType="submit">
-                                            Add Inventory
-                                        </Button>
-                                    </Form.Item>
-                                </Form>
+                                        <div className='form-content'>
+
+                                        
+                                            <div className='left-column'>
+                                                <Form.Item 
+                                                    name="inventoryId" 
+                                                    label="Inventory ID" 
+                                                    rules={[{ required: true, message: 'Please input the quantity!' }]}
+                                                >
+                                                    <Input />
+                                                </Form.Item>
+                                                <Form.Item 
+                                                    name="telNo" 
+                                                    label="Contact No" 
+                                                    rules={[{ required: true, message: 'Please input the quantity!' }]}
+                                                >
+                                                    <Input />
+                                                </Form.Item>
+                                                <Form.Item 
+                                                    name="email" 
+                                                    label="Email" 
+                                                    rules={[{ required: true, message: 'Please input the quantity!' }]}
+                                                >
+                                                    <Input />
+                                                </Form.Item>
+                                                <Form.Item 
+                                                    name="address" 
+                                                    label="Official Address" 
+                                                    rules={[{ required: true, message: 'Please input the quantity!' }]}
+                                                >
+                                                    <Input />
+                                                </Form.Item>
+                                                <Form.Item 
+                                                    name="noOfEmployee" 
+                                                    label="No of Employees" 
+                                                    rules={[{ required: true, message: 'Please input the quantity!' }]}
+                                                >
+                                                    <InputNumber min={1} />
+                                                </Form.Item>
+                                                <Form.Item 
+                                                    name="maxStockCap" 
+                                                    label="Maximum Stock Capacity" 
+                                                    rules={[{ required: true, message: 'Please input the quantity!' }]}
+                                                >
+                                                    <Input />
+                                                </Form.Item>
+                                                <Form.Item 
+                                                    name="availableStockQuantity" 
+                                                    label="Available Stock Quantity" 
+                                                    rules={[{ required: true, message: 'Please input the quantity!' }]}
+                                                >
+                                                    <Input />
+                                                </Form.Item>
+                                            </div>
+                                        
+                                            <div className="right-column"> 
+                                                <Form.Item 
+                                                    name="locationPos" 
+                                                    label="Location" 
+                                                    rules={[{ required: false, message: 'Please select a location!' }]}
+                                                >
+                                                    <MapContainer 
+                                                            center={[6.079635106310293, 80.19188949389012]} 
+                                                            zoom={13} 
+                                                            style={{ height: '300px', width: '100%' }}
+                                                        >
+                                                            <TileLayer
+                                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                            />
+                                                            {location && <Marker position={location} />}
+                                                            <LocationPicker setLocation={setLocation}/>
+                                                    </MapContainer>
+                                                </Form.Item>
+
+                                                <Form.Item className="submit-button">
+                                                    <Button type="primary" htmlType="submit">
+                                                        Add Inventory
+                                                    </Button>
+                                                </Form.Item>
+                                            </div>
+                                        </div>
+                                    </Form>
+                                </div>
                             </div>
                         </div>
                     </div>
