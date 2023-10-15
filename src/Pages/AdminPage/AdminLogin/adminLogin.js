@@ -1,19 +1,39 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Typography } from 'antd';
+import { Form, Input, Button, Typography,message} from 'antd';
 import './adminLogin.css';
+import { useInventory } from '../../../components/InventoryContext';
+import {fetchAdminLogin} from '../../../api';
+import { useNavigate } from 'react-router-dom';
 
 const { Title } = Typography;
 
 const AdminLogin = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const {adminId, setAdminId} = useInventory();
+  const navigate = useNavigate();
 
-  const onFinish = (values) => {
-    setLoading(true);
-    console.log('Received values of form: ', values);
-    // Add your authentication logic here.
-    setLoading(false);
-  };
+  const onFinish = async (values) => {
+    console.log(values);
+    try {
+        
+        // API request to the backend
+        const response = await fetchAdminLogin(values);
+        console.log(response);
+        
+        // Handle response accordingly
+        if (response.status === 200) {
+            setAdminId(response.data);
+            message.success('Login successful!');
+            navigate('/admin');
+        } else {
+            message.error('Login failed. Please check your credentials.');
+        }
+    } catch (error) {
+        console.error('An error occurred during the login process:', error);
+        message.error('An error occurred. Please try again later.');
+    }
+};
 
   return (
     <div className="login-container">
@@ -25,14 +45,14 @@ const AdminLogin = () => {
         layout="vertical"
       >
         <Form.Item
-          name="username"
+          name="adminUserName"
           label="Username"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          name="password"
+          name="adminPassword"
           label="Password"
           rules={[{ required: true, message: 'Please input your password!' }]}
         >

@@ -115,9 +115,23 @@ export default function AddInventory() {
                                         
                                             <div className="right-column"> 
                                                 <Form.Item 
+                                                    name="userName" 
+                                                    label="User Name" 
+                                                    rules={[{ required: true, message: 'Please input the quantity!' }]}
+                                                >
+                                                    <Input />
+                                                </Form.Item>
+                                                <Form.Item 
+                                                    name="password" 
+                                                    label="Password" 
+                                                    rules={[{ required: true, message: 'Please input the quantity!' }]}
+                                                >
+                                                    <Input.Password placeholder="Password"/>
+                                                </Form.Item>
+                                                <Form.Item 
                                                     name="locationPos" 
                                                     label="Location" 
-                                                    rules={[{ required: false, message: 'Please select a location!' }]}
+                                                    rules={[{ required: true, message: 'Please select a location!' }]}
                                                 >
                                                     <MapContainer 
                                                             center={[6.079635106310293, 80.19188949389012]} 

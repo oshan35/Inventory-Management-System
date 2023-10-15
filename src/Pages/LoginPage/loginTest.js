@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import './loginpage.css';
-import { fetchLogin } from '../../api';
+import { fetchAdminLogin } from '../../api';
+import { useInventory } from '../../components/InventoryContext';
 
 const LoginPageEdited = () => {
     const [isChecked, setIsChecked] = useState(false);
-
-    
+    const { inventoryId, setInventoryId } = useInventory();
 
 
 
@@ -17,10 +17,11 @@ const LoginPageEdited = () => {
     const onFinish = async (values) => {
         try {
             // API request to the backend
-            const response = await fetchLogin(values);
+            const response = await fetchAdminLogin(values);
             
             // Handle response accordingly
-            if (response.data.success) {
+            if (response.status === 200) {
+                setInventoryId(response);
                 message.success('Login successful!');
                 // Further logic (e.g., redirect, store user data, etc.)
             } else {

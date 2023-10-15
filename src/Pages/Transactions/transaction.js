@@ -5,6 +5,7 @@ import PageHedder from "../../components/hedder/hedder";
 import { Button, Space } from 'antd';
 import TransactionModal from './transactionForm'; 
 import './transaction.css';
+import { useInventory } from '../../components/InventoryContext';
 
 const sampleData = [
     {
@@ -41,6 +42,8 @@ export default function TransactionsPage() {
     const [checkedKeys, setCheckedKeys] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
+    const [inventoryId, setInventoryId] = useInventory();
+
 
     const columns = [
         {
@@ -141,6 +144,7 @@ export default function TransactionsPage() {
                     </div>
                     <div className="transactions-content">
                         <div className="row">
+                            <p>id: {inventoryId}</p>
                             <div className='button-container'>
                                 <Button className='transaction-btn' onClick={handleAdd}>New Transactions</Button>
                                 <Button type='primary' className='transaction-btn' id="delete" onClick={handleDelete}>Delete Transactions</Button>

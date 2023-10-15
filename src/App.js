@@ -14,21 +14,27 @@ import Admin from './Pages/AdminPage/admin';
 import AdminLogin from './Pages/AdminPage/AdminLogin/adminLogin';
 import AddInventory from './Pages/AdminPage/AddInventoryPage/addInventory';
 
+import { InventoryProvider } from './components/InventoryContext';
+
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route index element={<Dashboard />} />
-        <Route path="dashboard" element={<Dashboard/>} />
-        <Route path="inventories" element={<InventoryPage />} />
-        <Route path="transactions" element={<TransactionsPage/>} />  {/* Check this line */}
-        <Route path="products" element={<ProductsPage/>} />
-        <Route path="admin" element={<Admin/>}/>
-        <Route path="adminLogin" element={<AdminLogin/>}/>
-        <Route path="addInventory" element={<AddInventory/>}/>
-      </Routes>
-    </Router>
+    <InventoryProvider>
+        <Router>
+              <Routes>
+                <Route index element={<LoginPageEdited />} />
+                <Route path="dashboard" element={<Dashboard/>} />
+                <Route path="inventories" element={<InventoryPage />} />
+                <Route path="transactions" element={<TransactionsPage/>} />  
+                <Route path="products" element={<ProductsPage/>} />
+                <Route path="addInventory" element={<AddInventory/>}/>
+              </Routes>
+              <Routes>
+                <Route path='admin-login' index element={<AdminLogin/>}/>
+                <Route path="admin" element={<Admin/>}/>
+              </Routes>
+        </Router>
+    </InventoryProvider>
   );
 }
 
