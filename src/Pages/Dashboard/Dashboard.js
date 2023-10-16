@@ -16,7 +16,10 @@ export default function Dashboard() {
                     <div className="dashboard-content">
                         <div className="row">
                             <div className='cost-revenew'>
-                                <RevenueCostChart className="graph"/>
+                                <div className='col-5'>
+                                    <RevenueCostChart className="graph-costrevanue"/>
+                                </div>
+                                
                             </div>
                             <div className='cost-revenew'>
                                 <div className="column">

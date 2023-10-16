@@ -80,7 +80,7 @@ export default function RevenueCostChart() {
   };
 
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <ApexCharts
         options={options3}
         series={revenueCostData}

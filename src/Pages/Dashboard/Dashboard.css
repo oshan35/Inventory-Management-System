@@ -16,6 +16,7 @@
 .column {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
    
 }
 
@@ -35,12 +36,32 @@
 .cost-revenew {
     background-color: #f8f9fa;
     display: flex;
+    justify-content: center;  
+    align-items: center;    
     margin-bottom: 20px;
     padding: 20px;
     border: 1px solid #dee2e6;
     border-radius: 4px;
     width: 100%;
     
+}
+
+.col-6{
+    width: 45%;
+    height: 100%;
+    padding-left: 40px;
+}
+
+.col-5{
+    display: flex;
+    justify-content: center;  
+    align-items: center;       
+    width: 90%;
+}
+
+.graph-costrevanue{
+    width: 100%;
+
 }
 
 

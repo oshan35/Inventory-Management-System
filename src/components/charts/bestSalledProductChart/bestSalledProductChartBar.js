@@ -11,7 +11,6 @@ export default function BestSelledProductChartBar() {
       try {
         const response = await fetchChannelData();
         console.log(response.data);
-        console.log("Hi");
         setChannelData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -69,12 +68,12 @@ export default function BestSelledProductChartBar() {
   };
 
   return (
-    <div>
+    <div className="chart" style={{ width: '100%' }}>
       <ApexCharts
         options={options3}
         series={channelData}
         type="bar"
-        width="90%"
+        width="100%"
         height={260}
         sx={{ padding: 0, margin: 0 }}
       />
