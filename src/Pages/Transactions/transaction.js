@@ -6,43 +6,15 @@ import { Button, Space } from 'antd';
 import TransactionModal from './transactionForm'; 
 import './transaction.css';
 import { useInventory } from '../../components/InventoryContext';
+import { fetchTransactionData } from '../../api';
 
-const sampleData = [
-    {
-        key: '1',
-        orderId: '123456',
-        productId: 'P12345',
-        transactionDate: '2023-09-21',
-        customerName: 'John Doe',
-        items: 'Item1, Item2',
-        total: '$200.00'
-    },
-    {
-        key: '2',
-        orderId: '654321',
-        productId: 'P54321',
-        transactionDate: '2023-09-21',
-        customerName: 'Jane Smith',
-        items: 'Item3, Item4',
-        total: '$300.00'
-    },
-    {
-        key: '3',
-        orderId: '112233',
-        productId: 'P67890',
-        transactionDate: '2023-09-21',
-        customerName: 'Bob Johnson',
-        items: 'Item5, Item6',
-        total: '$150.00'
-    }
-];
 
 export default function TransactionsPage() {
-    const [data, setData] = useState(sampleData);
+    const [data, setData] = useState([]);
     const [checkedKeys, setCheckedKeys] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
-    const [inventoryId, setInventoryId] = useInventory();
+    const {inventoryId, setInventoryId} = useInventory();
 
 
     const columns = [
@@ -58,30 +30,45 @@ export default function TransactionsPage() {
             width: '5%',
         },
         {
-          title: 'Order ID',
-          dataIndex: 'orderId',
+          title: 'Transaction ID',
+          dataIndex: 'transactionID',
         },
         {
           title: 'Product ID',
-          dataIndex: 'productId',
+          dataIndex: 'product',
         },
         {
             title: 'Transaction Date',
-            dataIndex: 'transactionDate',
+            dataIndex: 'date',
         },
         {
-          title: 'Customer Name',
-          dataIndex: 'customerName',
+          title: 'Quantity',
+          dataIndex: 'quantity',
         },
         {
-          title: 'Items',
-          dataIndex: 'items',
+          title: 'Unit Price',
+          dataIndex: 'unitPrice',
         },
         {
           title: 'Total',
           dataIndex: 'total',
         },
+        {
+            title: 'Buy/Sell',
+            dataIndex: 'type',
+        },
     ];
+
+    useEffect(() => async () => {
+        try {
+            console.log("Hii: "+inventoryId);
+            const response = await fetchTransactionData(inventoryId);
+            console.log(response.data);
+            setData(response.data);
+        } catch (error) {
+            console.log("Error fetching transaction data")
+        }
+    },[]);
 
     const handleCheck = (e, key) => {
         const newCheckedKeys = e.target.checked
@@ -134,6 +121,7 @@ export default function TransactionsPage() {
                 console.log('Validation Failed:', info);
             });
     };
+
     return (
         <>
             <PageHedder />

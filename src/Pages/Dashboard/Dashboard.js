@@ -2,6 +2,9 @@ import React from 'react';
 import NavbarEdited from "../../components/navbar/nav";
 import PageHedder from "../../components/hedder/hedder";
 import RevenueCostChart from '../../components/charts/costrevenewChart/costrevernewChart';
+import BestSelledProductChart from '../../components/charts/bestSalledProductChart/bestSellingProductChart';
+import BestSelledProductChartBar from '../../components/charts/bestSalledProductChart/bestSalledProductChartBar';
+
 import './Dashboard.css';
 
 export default function Dashboard() {
@@ -24,10 +27,10 @@ export default function Dashboard() {
                             <div className='cost-revenew'>
                                 <div className="column">
                                     <div className='col-6'>
-                                        <RevenueCostChart className="graph"/>
+                                        <BestSelledProductChart className="graph"/>
                                     </div>
                                     <div className='col-6'>
-                                        <RevenueCostChart className="graph"/>
+                                        <BestSelledProductChartBar className="graph"/>
                                     </div>
                                 </div>
                             </div>

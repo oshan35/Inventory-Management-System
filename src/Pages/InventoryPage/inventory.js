@@ -3,11 +3,13 @@ import { Input, Table } from 'antd';
 import './inventory.css';
 import NavbarEdited from "../../components/navbar/nav";
 import PageHedder from "../../components/hedder/hedder";
-import { fetchSearchNearestData } from '../../api';
+import { fetchSearchNearestInventories } from '../../api';
+import { useInventory } from '../../components/InventoryContext';
 
 const InventoryPage = () => {
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
+  const {inventoryId, setInventoryId} = useInventory();
 
   const columns = [
     {
@@ -20,7 +22,7 @@ const InventoryPage = () => {
     },
     {
       title: 'Location',
-      dataIndex: 'location',
+      dataIndex: 'address',
     },
     {
       title: 'Distance',
@@ -28,23 +30,20 @@ const InventoryPage = () => {
     },
     {
       title: 'Available Stocks',
-      dataIndex: 'availableStocks',
+      dataIndex: 'quantity',
     },
   ];
   const handleSearch = async (value) => {
-    setSearch(value);
     try {
-      const response = await fetchSearchNearestData(value);  
+      console.log(value);
+      const response = await fetchSearchNearestInventories(inventoryId,value);  
+      console.log(response.data);
       setData(response.data);
     } catch (error) {
       console.error('There was an error fetching the data!', error);
     }
   };
 
-  useEffect(() => {
-    
-    handleSearch('');
-  }, []);
 
   return (
     <div className="container">

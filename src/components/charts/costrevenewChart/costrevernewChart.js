@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import ApexCharts from "react-apexcharts";
 import { fetchCostRevernewData } from "../../../api";
+import { useInventory } from "../../InventoryContext";
+
+
 
 export default function RevenueCostChart() {
   const [revenueCostData, setRevenueCostData] = useState([]);
+  const { inventoryId, setInventoryId } = useInventory();
+
 
   useEffect(() => async () => {
       try {
-        const response = await fetchCostRevernewData();
-        console.log(response.data);
+        const response = await fetchCostRevernewData(inventoryId);
         setRevenueCostData(response.data);
       } catch (error) {
         console.log('Error fetching cost review data');
-        
       }
 
   }, []);

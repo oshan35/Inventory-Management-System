@@ -16,15 +16,26 @@ export const fetchTopFiveProducts = () => {
     return api.get('/topFive');
 }
 
-export const fetchCostRevernewData = () => {
-    return api.get("/api/revenue-cost-data");
+export const fetchCostRevernewData = (inventoryId) => {
+  return api.get(`${API_BASE_URL}/api/inventory/cost-Revenue/${inventoryId}`);
 }
 
-export const fetchSearchNearestData = (query) => {
-  return axios.get('api/nearest', {
-    params: { query }
-  });
+
+
+// export const fetchSearchNearestInventories = (inventoryId,search) => {
+//   return axios.get(`${API_BASE_URL}/api/inventory/by-productID/${inventoryId}/${search}`, {
+//     params: { 'inventoryId':inventoryId,'productId': search}
+//   });
+// };
+
+export const fetchSearchNearestInventories = (inventoryId, search) => {
+  return axios.get(`${API_BASE_URL}/api/inventory/by-productID/${inventoryId}/${search}`);
 };
+
+export const fetchTransactionData = (inventoryId) => {
+  return axios.get(`${API_BASE_URL}/api/inventory/transactions/${inventoryId}`)
+}
+
 
 export const fetchInventoryLogin = async (values) => {
   try {
