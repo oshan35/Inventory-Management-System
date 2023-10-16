@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'http://localhost:8080';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -28,7 +28,7 @@ export const fetchSearchNearestData = (query) => {
 
 export const fetchInventoryLogin = async (values) => {
   try {
-      const response = await axios.post('api/inventory/login', values);
+      const response = await axios.post('http://localhost:8080/api/inventory/login', values);
       return response;
   } catch (error) {
       console.error('Error during API request:', error);

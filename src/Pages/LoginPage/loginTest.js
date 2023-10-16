@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import './loginpage.css';
-import { fetchAdminLogin } from '../../api';
+import { fetchInventoryLogin } from '../../api';
 import { useInventory } from '../../components/InventoryContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPageEdited = () => {
     const [isChecked, setIsChecked] = useState(false);
     const { inventoryId, setInventoryId } = useInventory();
-
+    const navigate = useNavigate();
 
 
     const handleCheckboxToggle = () => {
@@ -17,13 +18,15 @@ const LoginPageEdited = () => {
     const onFinish = async (values) => {
         try {
             // API request to the backend
-            const response = await fetchAdminLogin(values);
+            const response = await fetchInventoryLogin(values);
             
             // Handle response accordingly
             if (response.status === 200) {
-                setInventoryId(response);
+                setInventoryId(response.data);
                 message.success('Login successful!');
-                // Further logic (e.g., redirect, store user data, etc.)
+                message.success('Login as '+response.data);
+                navigate('/dashboard');
+                
             } else {
                 message.error('Login failed. Please check your credentials.');
             }
@@ -55,14 +58,14 @@ const LoginPageEdited = () => {
                     onFinishFailed={onFinishFailed}
                 >
                     <Form.Item
-                        name="username"
+                        name="inventoryUserName"
                         rules={[{ required: true, message: 'Please input your username!' }]}
                     >
                         <Input placeholder="Username"/>
                     </Form.Item>
 
                     <Form.Item
-                        name="password"
+                        name="inventoryPassword"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
                         <Input.Password placeholder="Password"/>
