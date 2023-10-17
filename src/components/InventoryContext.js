@@ -8,14 +8,12 @@ export const useInventory = () => {
 };
 
 export const InventoryProvider = ({ children }) => {
-    // Initialize from sessionStorage or default to null
     const initialInventoryId = sessionStorage.getItem('inventoryId') || null;
     const initialAdminId = sessionStorage.getItem('adminId') || null;
 
     const [inventoryId, setInventoryId] = useState(initialInventoryId);
     const [adminId, setAdminId] = useState(initialAdminId);
 
-    // Update sessionStorage whenever inventoryId or adminId changes
     useEffect(() => {
         if (inventoryId) {
             sessionStorage.setItem('inventoryId', inventoryId);

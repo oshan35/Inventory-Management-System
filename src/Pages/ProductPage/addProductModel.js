@@ -1,23 +1,26 @@
 // TransactionModal.js
-import React, { useEffect } from 'react';
+import React, { useEffect , useContext} from 'react';
 import { Modal, Form, Input } from 'antd';
+import { isValidDateValue } from '@testing-library/user-event/dist/utils';
+import { FormContext } from 'antd/es/form/context';
 
-export default function ProductModal({ isModalVisible, handleOk, handleCancel, transaction }) {
+export default function ProductModal({ isModalVisible, handleOk, handleCancel, selectedProduct }) {
     const [form] = Form.useForm();
 
     useEffect(() => {
-        if (transaction) {
+        console.log("Hello");
+        console.log(selectedProduct);
+        if (selectedProduct) {
             form.setFieldsValue({
-                orderId: transaction.orderId,
-                productId: transaction.productId,
-                customerName: transaction.customerName,
-                items: transaction.items,
-                total: transaction.total
+                ProductID: selectedProduct.productId,
+                ProductName: selectedProduct.productName,
+                availableStock: selectedProduct.availableStock,
+                pricePerUnit: selectedProduct.price,
             });
         } else {
             form.resetFields();
         }
-    }, [transaction, form]);
+    }, [isModalVisible]);
     
 
     return (
@@ -32,32 +35,32 @@ export default function ProductModal({ isModalVisible, handleOk, handleCancel, t
                 layout="vertical"
             >
                 <Form.Item
-                    name="Product ID"
-                    label="productID"
+                    name="ProductID"
+                    label="product ID"
                     rules={[{ required: true}]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="Product Name"
-                    label="productName"
+                    name="ProductName"
+                    label="Product Name"
                     rules={[{ required: true }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="Available Stock"
-                    label="availableStock"
+                    name="availableStock"
+                    label="Available Stock"
                     rules={[{ required: true }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="Price per Unit"
-                    label="pricePerUnit"
+                    name="pricePerUnit"
+                    label="Price per Unit"
                     rules={[{ required: true }]}
                 >
                     <Input />

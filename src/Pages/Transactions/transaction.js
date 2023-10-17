@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Input, Table, Checkbox } from 'antd';
 import NavbarEdited from "../../components/navbar/nav";
 import PageHedder from "../../components/hedder/hedder";
-import { Button, Space } from 'antd';
+import {Divider, Radio, Button, Space } from 'antd';
 import TransactionModal from './transactionForm'; 
 import './transaction.css';
 import { useInventory } from '../../components/InventoryContext';
@@ -59,17 +59,6 @@ export default function TransactionsPage() {
         },
     ];
 
-    useEffect(() => async () => {
-        try {
-            console.log("Hii: "+inventoryId);
-            const response = await fetchTransactionData(inventoryId);
-            console.log(response.data);
-            setData(response.data);
-        } catch (error) {
-            console.log("Error fetching transaction data")
-        }
-    },[]);
-
     const handleCheck = (e, key) => {
         const newCheckedKeys = e.target.checked
             ? [...checkedKeys, key]
@@ -83,6 +72,18 @@ export default function TransactionsPage() {
             setSelectedTransaction(null);
         }
     };
+    
+    useEffect(() => async () => {
+        try {
+            console.log("Hii: "+inventoryId);
+            const response = await fetchTransactionData(inventoryId);
+            console.log(response.data);
+            setData(response.data);
+        } catch (error) {
+            console.log("Error fetching transaction data")
+        }
+    },[]);
+
 
     const handleCancel = () => {
         setIsModalVisible(false);

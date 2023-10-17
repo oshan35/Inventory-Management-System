@@ -1,9 +1,10 @@
 // TransactionModal.js
 import React, { useEffect } from 'react';
-import { Modal, Form, Input } from 'antd';
+import { Modal, Form, Input, Select } from 'antd';
 
 export default function TransactionModal({ isModalVisible, handleOk, handleCancel, transaction }) {
     const [form] = Form.useForm();
+    const { Option } = Select;
 
     useEffect(() => {
         if (transaction) {
@@ -32,8 +33,8 @@ export default function TransactionModal({ isModalVisible, handleOk, handleCance
                 layout="vertical"
             >
                 <Form.Item
-                    name="orderId"
-                    label="orderID"
+                    name="Transaction ID"
+                    label="transactionID"
                     rules={[{ required: true, message: 'Please input the order ID!' }]}
                 >
                     <Input />
@@ -41,34 +42,44 @@ export default function TransactionModal({ isModalVisible, handleOk, handleCance
 
                 <Form.Item
                     name="Product ID"
-                    label="productID"
+                    label="product"
                     rules={[{ required: true, message: 'Please input the order ID!' }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="Customer Name"
-                    label="cusName"
-                    rules={[{ required: true, message: 'Please input the order ID!' }]}
+                    name="Transaction Date"
+                    label="date"
+                    rules={[{ required: true, message: 'Please input the Transaction Date!' }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="Items"
-                    label="items"
-                    rules={[{ required: true, message: 'Please input the order ID!' }]}
+                    name="Quantity"
+                    label="quantity"
+                    rules={[{ required: true, message: 'Please input the Quantity!' }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="Total"
-                    label="total"
+                    name="Unit Price"
+                    label="unitPrice"
                     rules={[{ required: true, message: 'Please input the order ID!' }]}
                 >
                     <Input />
+                </Form.Item>
+                <Form.Item
+                    name="Buy/Sell"
+                    label="type"
+                    rules={[{ required: true, message: 'Please input the order ID!' }]}
+                >
+                <Select placeholder="Select a type">
+                    <Option value="buy">Buy</Option>
+                    <Option value="sell">Sell</Option>
+                </Select>
                 </Form.Item>
             </Form>
         </Modal>

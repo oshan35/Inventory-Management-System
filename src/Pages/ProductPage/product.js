@@ -5,9 +5,47 @@ import PageHedder from "../../components/hedder/hedder";
 import { Button, Space } from 'antd';
 import ProductModal from './addProductModel';
 
+const dummydata = [
+    {
+        key: '1',
+        productId: 'P001',
+        productName: 'Laptop',
+        availableStock: 25,
+        price: '$1000'
+    },
+    {
+        key: '2',
+        productId: 'P002',
+        productName: 'Mobile Phone',
+        availableStock: 50,
+        price: '$500'
+    },
+    {
+        key: '3',
+        productId: 'P003',
+        productName: 'Headphones',
+        availableStock: 150,
+        price: '$50'
+    },
+    {
+        key: '4',
+        productId: 'P004',
+        productName: 'Keyboard',
+        availableStock: 60,
+        price: '$20'
+    },
+    {
+        key: '5',
+        productId: 'P005',
+        productName: 'Mouse',
+        availableStock: 80,
+        price: '$15'
+    }
+];
+
 
 export default function ProductsPage() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(dummydata);
     const [checkedKeys, setCheckedKeys] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -119,7 +157,7 @@ export default function ProductsPage() {
                 isModalVisible={isModalVisible}
                 handleOk={handleOk}
                 handleCancel={handleCancel}
-                transaction={selectedProduct}
+                selectedProduct={selectedProduct}
             />
 
         </>
