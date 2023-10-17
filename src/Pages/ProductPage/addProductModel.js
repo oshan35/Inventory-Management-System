@@ -14,8 +14,8 @@ export default function ProductModal({ isModalVisible, handleOk, handleCancel, s
             form.setFieldsValue({
                 ProductID: selectedProduct.productId,
                 ProductName: selectedProduct.productName,
-                availableStock: selectedProduct.availableStock,
-                pricePerUnit: selectedProduct.price,
+                availableStock: selectedProduct.unitPrice,
+                pricePerUnit: selectedProduct.description,
             });
         } else {
             form.resetFields();

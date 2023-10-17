@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import ApexCharts from "react-apexcharts";
 import { Box } from "@mui/material";
 import { fetchTopFiveProducts } from "../../../api";
+import { useInventory } from "../../InventoryContext";
 
 export default function BestSelledProductChart() {
   const [channelData, setChannelData] = useState([]);
+  const {inventoryId} = useInventory();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchTopFiveProducts();
+        const response = await fetchTopFiveProducts(inventoryId);
         console.log(response.data);
         setChannelData(response.data);
       } catch (error) {
@@ -35,7 +38,7 @@ export default function BestSelledProductChart() {
       offsetY: 0,
     },
     title: {
-      text: "Top 5 Selled Product last Week",
+      text: "Top 5 Selled Product last year",
     },
     plotOptions: {
       bar: {
@@ -58,7 +61,7 @@ export default function BestSelledProductChart() {
       opacity: 1,
     },
     xaxis: {
-      categories: ["Mon", "Thu", "Web", "Tue", "Fri", "Sat", "Sun"],
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Juy","Aug","Sep","Oct","Nov","Dec"]
     },
     tooltip: {
       fixed: {
@@ -70,7 +73,7 @@ export default function BestSelledProductChart() {
     },
   };
   return (
-    <div style={{ width: '100%' }}>
+    <div >
       <ApexCharts
         options={options3}
         series={channelData}

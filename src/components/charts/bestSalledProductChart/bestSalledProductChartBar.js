@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import ApexCharts from "react-apexcharts";
-import { fetchChannelData } from "../../../api";
+import { fetchTopFiveYearData } from "../../../api";
 import { Box } from "@mui/material";
+import { Inventory } from "@mui/icons-material";
+import { useInventory } from "../../InventoryContext";
 
 export default function BestSelledProductChartBar() {
   const [channelData, setChannelData] = useState([]);
+  const [catData, setCatData] = useState([]);
+  const {inventoryId} = useInventory();
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchChannelData();
-        console.log(response.data);
-        setChannelData(response.data);
+        const response = await fetchTopFiveYearData(inventoryId);
+        //setChannelData(response.values);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -23,7 +27,7 @@ export default function BestSelledProductChartBar() {
     console.log(channelData);
 
   const options3 = {
-    colors: ["#5A4FCF", "#FFA500", "#C53500", "#FFBF00", "#FF3659"],
+    colors: ["#5A4FCF", "#FFA500", "#C53500", "#FFBF00", "#FF3659", "#00C535", "#0055C5"],
     chart: {
       id: "basic-bar",
       type: "bar",
@@ -60,7 +64,7 @@ export default function BestSelledProductChartBar() {
     tooltip: {
       fixed: {
         enabled: true,
-        position: "topLeft", // topRight, topLeft, bottomRight, bottomLeft
+        position: "topLeft", 
         offsetY: 30,
         offsetX: 60,
       },

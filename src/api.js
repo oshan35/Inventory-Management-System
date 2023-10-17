@@ -11,9 +11,11 @@ export const fetchChannelData = () => {
   return api.get('/products'); 
 };
 
-
-export const fetchTopFiveProducts = () => {
-    return api.get('/topFive');
+export const fetchTopFiveYearData = (inventoryId) => {
+   return api.get(`${API_BASE_URL}/api/sales/top-five-year/${inventoryId}`);
+}
+export const fetchTopFiveProducts = (inventoryId) => {
+    return api.get(`${API_BASE_URL}/api/sales/topFive/${inventoryId}`);
 }
 
 export const fetchCostRevernewData = (inventoryId) => {
@@ -34,6 +36,18 @@ export const fetchSearchNearestInventories = (inventoryId, search) => {
 
 export const fetchTransactionData = (inventoryId) => {
   return axios.get(`${API_BASE_URL}/api/inventory/transactions/${inventoryId}`)
+}
+
+export const fetchProductDetails= (inventoryId) => {
+  return axios.get(`${API_BASE_URL}/api/products/all/${inventoryId}`)
+}
+
+export const addNewProductApi = (productData) => {
+  return axios.post(`${API_BASE_URL}/api/products/new`,productData);
+}
+
+export const updateProductAPI = (productData) => {
+  return axios.post(`${API_BASE_URL}/api/products/all`,productData);
 }
 
 

@@ -4,51 +4,20 @@ import NavbarEdited from "../../components/navbar/nav";
 import PageHedder from "../../components/hedder/hedder";
 import { Button, Space } from 'antd';
 import ProductModal from './addProductModel';
+import { useInventory } from '../../components/InventoryContext';
+import { fetchProductDetails, addNewProductApi,updateProductAPI } from '../../api';
 
-const dummydata = [
-    {
-        key: '1',
-        productId: 'P001',
-        productName: 'Laptop',
-        availableStock: 25,
-        price: '$1000'
-    },
-    {
-        key: '2',
-        productId: 'P002',
-        productName: 'Mobile Phone',
-        availableStock: 50,
-        price: '$500'
-    },
-    {
-        key: '3',
-        productId: 'P003',
-        productName: 'Headphones',
-        availableStock: 150,
-        price: '$50'
-    },
-    {
-        key: '4',
-        productId: 'P004',
-        productName: 'Keyboard',
-        availableStock: 60,
-        price: '$20'
-    },
-    {
-        key: '5',
-        productId: 'P005',
-        productName: 'Mouse',
-        availableStock: 80,
-        price: '$15'
-    }
-];
 
 
 export default function ProductsPage() {
-    const [data, setData] = useState(dummydata);
+    const [data, setData] = useState([]);
     const [checkedKeys, setCheckedKeys] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const {inventoryId} = useInventory();
+    const [mode, setMode] = useState('add');
+
+
 
     const columns = [
         {
@@ -71,13 +40,13 @@ export default function ProductsPage() {
           dataIndex: 'productName',
         },
         {
-          title: 'Available Stock',
-          dataIndex: 'availableStock',
+          title: 'Unit Price',
+          dataIndex: 'unitPrice',
         },
         {
-            title: 'Price',
-            dataIndex: 'price',
-          }
+            title: 'Description',
+            dataIndex: 'description',
+        }
     ];
 
     const handleCheck = (e, key) => {
@@ -94,6 +63,17 @@ export default function ProductsPage() {
         }
     };
 
+    useEffect(() => async () => {
+        try {
+            console.log(inventoryId);
+            const response = await fetchProductDetails(inventoryId);
+            console.log(response);
+            setData(response.data);
+        } catch (error) {
+            console.log("Error fetching transaction data")
+        }
+    },[]);
+
     const handleCancel = () => {
         setIsModalVisible(false);
     };
@@ -103,6 +83,7 @@ export default function ProductsPage() {
     };
 
     const handleAdd = () => {
+        setMode('add');
         showModal(); 
     };
 
@@ -112,25 +93,47 @@ export default function ProductsPage() {
     };
 
     const handleUpdate = () => {
-        if (checkedKeys.length === 1) { 
+        if (checkedKeys.length === 1) {
+            setMode('update');
             setIsModalVisible(true);
         } else {
             alert('Please select exactly one transaction to update.');
         }
     };
 
-
-    const handleOk = (form) => {
+    const handleOk = async (form) => {
         form.validateFields()
-            .then(values => {
+            .then(async values => {
                 form.resetFields();
-                console.log('Submitted values:', values);
+                console.log("Values: "+values);
+                const productData = {
+                    inventoryId: inventoryId,
+                    ...values
+                };
+    
+                if (mode === 'add') {
+                    try {
+                        await addNewProductApi(productData);
+                        console.log('Product added successfully');
+                    } catch (error) {
+                        console.error('Error adding product', error);
+                    }
+                } else if (mode === 'update') {
+                    try {
+                        await updateProductAPI(productData); 
+                        console.log('Product updated successfully');
+                    } catch (error) {
+                        console.error('Error updating product', error);
+                    }
+                }
+    
                 setIsModalVisible(false);
             })
             .catch(info => {
                 console.log('Validation Failed:', info);
             });
     };
+    
     return (
         <>
             <PageHedder />
