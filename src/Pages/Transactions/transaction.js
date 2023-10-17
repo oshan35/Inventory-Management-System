@@ -6,7 +6,7 @@ import {Divider, Radio, Button, Space } from 'antd';
 import TransactionModal from './transactionForm'; 
 import './transaction.css';
 import { useInventory } from '../../components/InventoryContext';
-import { fetchTransactionData } from '../../api';
+import { fetchTransactionData, addNewTransaction } from '../../api';
 
 
 export default function TransactionsPage() {
@@ -15,7 +15,7 @@ export default function TransactionsPage() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
     const {inventoryId, setInventoryId} = useInventory();
-
+    const [, forceUpdate] = useState();
 
     const columns = [
         {
@@ -113,15 +113,32 @@ export default function TransactionsPage() {
 
     const handleOk = (form) => {
         form.validateFields()
-            .then(values => {
+            .then(async values => {
                 form.resetFields();
-                console.log('Submitted values:', values);
+                
+                const formattedDate = values.date ? values.date.format('YYYY-MM-DD') : null;
+                const total = values.unitPrice * values.quantity;
+                console.log(formattedDate);
+                
+                const transactionData = {
+                    inventoryId: inventoryId,
+                    ...values,
+                    date: formattedDate,
+                    total: total
+                };
+
+            
+                console.log(transactionData);
+                await addNewTransaction(transactionData);
+                forceUpdate({});
+                console.log("Transaction Sucessfull");
                 setIsModalVisible(false);
             })
             .catch(info => {
                 console.log('Validation Failed:', info);
             });
     };
+
 
     return (
         <>
@@ -136,8 +153,8 @@ export default function TransactionsPage() {
                             <p>id: {inventoryId}</p>
                             <div className='button-container'>
                                 <Button className='transaction-btn' onClick={handleAdd}>New Transactions</Button>
-                                <Button type='primary' className='transaction-btn' id="delete" onClick={handleDelete}>Delete Transactions</Button>
-                                <Button className='transaction-btn' onClick={handleUpdate}>Update Transactions</Button>
+                                {/* <Button type='primary' className='transaction-btn' id="delete" onClick={handleDelete}>Delete Transactions</Button>
+                                <Button className='transaction-btn' onClick={handleUpdate}>Update Transactions</Button> */}
                             </div>
                             <div className='data-area'>
                                 <Table columns={columns} dataSource={data} />

@@ -1,6 +1,7 @@
 // TransactionModal.js
 import React, { useEffect } from 'react';
-import { Modal, Form, Input, Select } from 'antd';
+import { Modal, Form, Input, Select,DatePicker  } from 'antd';
+import moment from 'moment';
 
 export default function TransactionModal({ isModalVisible, handleOk, handleCancel, transaction }) {
     const [form] = Form.useForm();
@@ -33,52 +34,52 @@ export default function TransactionModal({ isModalVisible, handleOk, handleCance
                 layout="vertical"
             >
                 <Form.Item
-                    name="Transaction ID"
-                    label="transactionID"
+                    name="transactionID"
+                    label="Transaction ID"
                     rules={[{ required: true, message: 'Please input the order ID!' }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="Product ID"
-                    label="product"
+                    name="productID"
+                    label="Product ID"
                     rules={[{ required: true, message: 'Please input the order ID!' }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="Transaction Date"
-                    label="date"
+                    name="date"
+                    label="Transaction Date"
                     rules={[{ required: true, message: 'Please input the Transaction Date!' }]}
                 >
-                    <Input />
+                    <DatePicker />
                 </Form.Item>
 
                 <Form.Item
-                    name="Quantity"
-                    label="quantity"
+                    name="quantity"
+                    label="Quantity"
                     rules={[{ required: true, message: 'Please input the Quantity!' }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="Unit Price"
-                    label="unitPrice"
+                    name="unitPrice"
+                    label="Unit Price"
                     rules={[{ required: true, message: 'Please input the order ID!' }]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="Buy/Sell"
-                    label="type"
+                    name="type"
+                    label="Buy/Sell"
                     rules={[{ required: true, message: 'Please input the order ID!' }]}
                 >
                 <Select placeholder="Select a type">
-                    <Option value="buy">Buy</Option>
-                    <Option value="sell">Sell</Option>
+                    <Option value="Buy">Buy</Option>
+                    <Option value="Sell">Sell</Option>
                 </Select>
                 </Form.Item>
             </Form>

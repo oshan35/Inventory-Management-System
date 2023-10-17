@@ -18,17 +18,17 @@ export const fetchTopFiveProducts = (inventoryId) => {
     return api.get(`${API_BASE_URL}/api/sales/topFive/${inventoryId}`);
 }
 
+export const deleteProduct = (productId)  =>{
+  return api.delete(`${API_BASE_URL}/api/products/delete-product/${productId}`)
+}
+
 export const fetchCostRevernewData = (inventoryId) => {
   return api.get(`${API_BASE_URL}/api/inventory/cost-Revenue/${inventoryId}`);
 }
 
-
-
-// export const fetchSearchNearestInventories = (inventoryId,search) => {
-//   return axios.get(`${API_BASE_URL}/api/inventory/by-productID/${inventoryId}/${search}`, {
-//     params: { 'inventoryId':inventoryId,'productId': search}
-//   });
-// };
+export const addNewTransaction = (transactionData) => {
+  return axios.post(`${API_BASE_URL}/api/transactions/add-new-transaction`,transactionData);
+}
 
 export const fetchSearchNearestInventories = (inventoryId, search) => {
   return axios.get(`${API_BASE_URL}/api/inventory/by-productID/${inventoryId}/${search}`);
@@ -46,8 +46,8 @@ export const addNewProductApi = (productData) => {
   return axios.post(`${API_BASE_URL}/api/products/new`,productData);
 }
 
-export const updateProductAPI = (productData) => {
-  return axios.post(`${API_BASE_URL}/api/products/all`,productData);
+export const updateProductAPI = (productId,productData) => {
+  return axios.put(`${API_BASE_URL}/api/products/update/${productId}`,productData);
 }
 
 

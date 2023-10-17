@@ -15,7 +15,7 @@ export default function BestSelledProductChartBar() {
     const fetchData = async () => {
       try {
         const response = await fetchTopFiveYearData(inventoryId);
-        //setChannelData(response.values);
+        setChannelData(response.data.values);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
