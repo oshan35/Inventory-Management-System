@@ -18,6 +18,14 @@
    
 }
 
+.instructions {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px; 
+    box-shadow: 0 rgba(0, 0, 0, 0.2), 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+  }
+  
 
 .nav-bar {
     height: 100vh;
@@ -28,7 +36,7 @@
 .transactions-content {
     background-color: #ffffff;
     box-sizing: border-box;
-    width: 92%;
+    width: 90%;
 }
 
 .button-container {

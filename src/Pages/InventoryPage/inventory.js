@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Table } from 'antd';
+import { Input, Table ,message} from 'antd';
 import './inventory.css';
 import NavbarEdited from "../../components/navbar/nav";
 import PageHedder from "../../components/hedder/hedder";
 import { fetchSearchNearestInventories } from '../../api';
 import { useInventory } from '../../components/InventoryContext';
+
 
 const InventoryPage = () => {
   const [search, setSearch] = useState('');
@@ -33,13 +34,23 @@ const InventoryPage = () => {
       dataIndex: 'quantity',
     },
   ];
+
+
   const handleSearch = async (value) => {
     try {
       console.log(value);
       const response = await fetchSearchNearestInventories(inventoryId,value);  
-      console.log(response.data);
-      setData(response.data);
+      console.log("Response: ",response);
+      if(response.data.length > 0){
+        console.log("Hello")
+        setData(response.data);
+        message.success("Item Found");
+      }else{
+        message.error("Item Not Found");
+      }
+      
     } catch (error) {
+      message.error("Error Loading Data");
       console.error('There was an error fetching the data!', error);
     }
   };

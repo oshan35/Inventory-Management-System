@@ -16,6 +16,8 @@ export default function TransactionsPage() {
     const [selectedTransaction, setSelectedTransaction] = useState(null);
     const {inventoryId, setInventoryId} = useInventory();
     const [, forceUpdate] = useState();
+    const [refreshData, setRefreshData] = useState(false);
+
 
     const columns = [
         {
@@ -82,7 +84,7 @@ export default function TransactionsPage() {
         } catch (error) {
             console.log("Error fetching transaction data")
         }
-    },[]);
+    },[refreshData]);
 
 
     const handleCancel = () => {
@@ -133,6 +135,7 @@ export default function TransactionsPage() {
                 forceUpdate({});
                 console.log("Transaction Sucessfull");
                 setIsModalVisible(false);
+                setRefreshData(prevState => !prevState);
             })
             .catch(info => {
                 console.log('Validation Failed:', info);
@@ -149,8 +152,10 @@ export default function TransactionsPage() {
                         <NavbarEdited />
                     </div>
                     <div className="transactions-content">
+                        <div className="instructions">
+                                <p>Instructions: Use the search bar to find products by ID.</p>
+                         </div>
                         <div className="row">
-                            <p>id: {inventoryId}</p>
                             <div className='button-container'>
                                 <Button className='transaction-btn' onClick={handleAdd}>New Transactions</Button>
                                 {/* <Button type='primary' className='transaction-btn' id="delete" onClick={handleDelete}>Delete Transactions</Button>

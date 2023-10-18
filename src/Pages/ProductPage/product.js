@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Table, Checkbox } from 'antd';
+import { Input, Table, Checkbox,Typography } from 'antd';
+import { PlusCircleFilled } from '@ant-design/icons';
 import NavbarEdited from "../../components/navbar/nav";
 import PageHedder from "../../components/hedder/hedder";
 import { Button, Space } from 'antd';
@@ -127,7 +128,9 @@ export default function ProductsPage() {
         if (checkedKeys.length === 1) {
             console.log(selectedProduct.productId);
             const res= await deleteProduct(selectedProduct.productId);
-            
+            if(res.status == 200){
+                setRefreshData(prevState => !prevState);
+            }
         } else {
             alert('Please select exactly one transaction to Delete.');
         }
@@ -190,6 +193,9 @@ export default function ProductsPage() {
                         <NavbarEdited />
                     </div>
                     <div className="transactions-content">
+                        <div className="instructions">
+                                <p>You can select product by checking the tick box.</p>
+                        </div>
                         <div className="row">
                             <div className='button-container'>
                                 <Button className='transaction-btn' onClick={handleAdd}>New Product</Button>
