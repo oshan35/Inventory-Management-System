@@ -149,7 +149,7 @@ export default function ProductsPage() {
             .then(async values => {
                 form.resetFields();
                 console.log("Values: "+values);
-                const productId = values.ProductID;
+                const productId = values.productId;
                 const productData = {
                     inventoryId: inventoryId,
                     ...values
@@ -166,7 +166,7 @@ export default function ProductsPage() {
                 } else if (mode === 'update') {
                     try {
                         console.log("Test");
-                        console.log(productId);
+                        console.log("Updet api",productId);
                         await updateProductAPI(productId,productData); 
                         console.log('Product updated successfully');
                     } catch (error) {
