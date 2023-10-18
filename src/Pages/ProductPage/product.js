@@ -25,9 +25,10 @@ export default function ProductsPage() {
     const [data, setData] = useState([]);
     const [checkedKeys, setCheckedKeys] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState([]);
     const {inventoryId} = useInventory();
     const [mode, setMode] = useState('add');
+    const [refreshData, setRefreshData] = useState(false);
 
 
 
@@ -61,23 +62,31 @@ export default function ProductsPage() {
         }
     ];
 
+
+
     const handleCheck = (e, key) => {
         console.log(checkedKeys);
         console.log(e.target);
         console.log(key);
         const newCheckedKeys = e.target.checked
-            ? [...checkedKeys,key]
+            ? [key]
             : checkedKeys.filter(checkedKey => checkedKey !== key);
         setCheckedKeys(newCheckedKeys);
     
         if (e.target.checked) {
             const selected = data.find(item => item.key === key);
-            console.log(selected);
+            console.log("product before: ",selected);
             setSelectedProduct(selected);
+            console.log("Selected Product",selectedProduct);
         } else {
             setSelectedProduct(null);
         }
     };
+
+    useEffect(() => {
+        console.log("Updated selectedProduct:", selectedProduct);
+    }, [selectedProduct]);
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -96,7 +105,7 @@ export default function ProductsPage() {
         };
     
         fetchData();
-    }, []);
+    }, [refreshData]);
     
 
     const handleCancel = () => {
@@ -111,15 +120,18 @@ export default function ProductsPage() {
         setSelectedProduct([]);
         setMode('add');
         showModal(); 
+  
     };
 
     const handleDelete = async () => {
         if (checkedKeys.length === 1) {
             console.log(selectedProduct.productId);
             const res= await deleteProduct(selectedProduct.productId);
+            
         } else {
             alert('Please select exactly one transaction to Delete.');
         }
+      
     };
 
     const handleUpdate = () => {
@@ -129,6 +141,7 @@ export default function ProductsPage() {
         } else {
             alert('Please select exactly one transaction to update.');
         }
+     
     };
 
     const handleOk = async (form) => {
@@ -160,7 +173,7 @@ export default function ProductsPage() {
                         console.error('Error updating product', error);
                     }
                 }
-    
+                setRefreshData(prevState => !prevState);
                 setIsModalVisible(false);
             })
             .catch(info => {

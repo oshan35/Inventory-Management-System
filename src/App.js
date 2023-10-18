@@ -16,7 +16,6 @@ import AddInventory from './Pages/AdminPage/AddInventoryPage/addInventory';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { InventoryProvider } from './components/InventoryContext';
 
-
 function App() {
   return (
     <InventoryProvider>
@@ -32,6 +31,7 @@ function App() {
               <Routes>
                 <Route path='admin-login' index element={<AdminLogin/>}/>
                 <Route path="admin" element={<Admin/>}/>
+                <Route path="add-inventory" element={<AddInventory/>}/>
               </Routes>
         </Router>
     </InventoryProvider>

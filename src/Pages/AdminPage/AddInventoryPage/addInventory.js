@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import AdminNavBar from '../../../components/admin-components/admin-nav/admin-navbar'
 import AdminPageHedder from '../../../components/admin-components/admin-hedder/adminHedder';
 import { MapContainer, TileLayer, Marker, useMapEvents, useMapEvent } from 'react-leaflet';
-import { Input, Form, InputNumber, Select, Button } from 'antd';
+import { Input, Form, InputNumber, Select, Button,message} from 'antd';
 import L from 'leaflet';
 import './addInventory.css';
-
+import { useInventory } from '../../../components/InventoryContext';
+import { addNewInventory } from '../../../api';
 
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -30,11 +31,29 @@ const LocationPicker = ({ setLocation, form }) => {
 export default function AddInventory() {
     const [location, setLocation] = useState({ lat: 51.505, lng: -0.09 });
     const [form] = Form.useForm();
+    const {adminId} = useInventory();
 
-    const onFinish = (values) => {
-        values.locationPos = location;
-        console.log('Form Values:', values);
-        console.log('Selected Location:', location);
+    const onFinish = async (values) => {
+        console.log("Hello")
+        delete values.locationPos;
+        const inventoryData ={
+            admin_id:adminId,
+            ...values,
+            longitude:location.lng,
+            latitude:location.lat
+        }
+        console.log(inventoryData);
+        try {
+            const res=await addNewInventory(inventoryData);
+            console.log(res.status);
+            if(res.status === 200){
+                message.success("Inventory Sucessfully Added")
+            }
+        } catch (error) {
+            message.error("Error Adding User Please Check the Values!")
+            console.log("Could not create a Inventory!");
+        }
+        
     };
 
 
@@ -131,7 +150,7 @@ export default function AddInventory() {
                                                 <Form.Item 
                                                     name="locationPos" 
                                                     label="Location" 
-                                                    rules={[{ required: true, message: 'Please select a location!' }]}
+                                                    rules={[{ required: false, message: 'Please select a location!' }]}
                                                 >
                                                     <MapContainer 
                                                             center={[6.079635106310293, 80.19188949389012]} 

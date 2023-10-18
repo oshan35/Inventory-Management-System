@@ -50,6 +50,13 @@ export const updateProductAPI = (productId,productData) => {
   return axios.put(`${API_BASE_URL}/api/products/update/${productId}`,productData);
 }
 
+export const addNewInventory = (inventoryData) => {
+  return axios.post(`${API_BASE_URL}/api/admin/new-inventory`,inventoryData);
+}
+
+export const inventoryDataAPI = (adminId) => {
+  return axios.get(`${API_BASE_URL}/api/admin/inventory/${adminId}`);
+}
 
 export const fetchInventoryLogin = async (values) => {
   try {

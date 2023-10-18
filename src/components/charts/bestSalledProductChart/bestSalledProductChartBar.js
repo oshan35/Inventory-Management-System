@@ -9,20 +9,35 @@ export default function BestSelledProductChartBar() {
   const [channelData, setChannelData] = useState([]);
   const [catData, setCatData] = useState([]);
   const {inventoryId} = useInventory();
-
-
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchTopFiveYearData(inventoryId);
-        setChannelData(response.data.values);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+    setChannelData([
+      {
+        data: [200, 500],
+      },
+    ]);
+
+    return () => {
+      setChannelData([]);
     };
-  
-    fetchData();
   }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+        
+  //       const response = await fetchTopFiveYearData(inventoryId);
+  //       console.log(response.data);
+  //       const data =[{
+  //         data:response.data.values
+  //       }];
+  //       setChannelData(response.data.values);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+  
+  //   fetchData();
+  // }, []);
 
     console.log(channelData);
 
@@ -56,9 +71,6 @@ export default function BestSelledProductChartBar() {
       categories: [
         "product 1",
         "product 2",
-        "product 3",
-        "product 4",
-        "product 5",
       ],
     },
     tooltip: {

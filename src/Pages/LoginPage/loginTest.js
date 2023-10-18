@@ -17,10 +17,9 @@ const LoginPageEdited = () => {
 
     const onFinish = async (values) => {
         try {
-            // API request to the backend
+
             const response = await fetchInventoryLogin(values);
             
-            // Handle response accordingly
             if (response.status === 200) {
                 setInventoryId(response.data);
                 message.success('Login successful!');

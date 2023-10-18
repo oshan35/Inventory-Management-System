@@ -4,15 +4,14 @@ import { Modal, Form, Input } from 'antd';
 import { isValidDateValue } from '@testing-library/user-event/dist/utils';
 import { FormContext } from 'antd/es/form/context';
 
-export default function ProductModal({ isModalVisible, handleOk, handleCancel, selectedProduct, isUpdateMode }) {
+export default function ProductUpdateModal({ isModalVisible, handleOk, handleCancel, selectedProduct, isUpdateMode }) {
     const [form] = Form.useForm();
     const [initialValues, setInitialValues] = useState({});
 
     // useEffect(() => {
     //     console.log("Inside: ",selectedProduct);
-    //     if (isUpdateMode) {
-    //         console.log("Hi")
-    //         console.log("Test Print:",selectedProduct)
+    //     if (selectedProduct) {
+
     //         setInitialValues({
     //             productId: selectedProduct.productId,
     //             productName: selectedProduct.productName,
@@ -22,7 +21,7 @@ export default function ProductModal({ isModalVisible, handleOk, handleCancel, s
     //     } else {
     //         setInitialValues({});
     //     }
-    // }, [selectedProduct, isUpdateMode]);
+    // }, [selectedProduct, isModalVisible]);
     useEffect(() => {
         if (isUpdateMode && selectedProduct) {
             const newValues = {
@@ -36,7 +35,6 @@ export default function ProductModal({ isModalVisible, handleOk, handleCancel, s
             form.resetFields();
         }
     }, [selectedProduct, isUpdateMode, form]);
-    
 
     return (
         <Modal

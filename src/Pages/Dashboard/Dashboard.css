@@ -31,32 +31,50 @@
     background-color: #ffffff;
     box-sizing: border-box;
     width: 92%;
+    box-sizing: border-box; 
 }
 
 .cost-revenew {
-    background-color: #f8f9fa;
     display: flex;
     justify-content: center;  
     align-items: center;    
     margin-bottom: 20px;
     padding: 20px;
-    border: 1px solid #dee2e6;
     border-radius: 4px;
     width: 100%;
     
 }
-
-.col-6{
+.graph-card{
+    display: flex;
+    padding-left: 5px;
     width: 45%;
     height: 100%;
-    padding-left: 40px;
+    justify-content: center;  
+    align-items: center;
+}
+.col-6{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.graph{
+    padding: 5px;
 }
 
 .col-5{
     display: flex;
     justify-content: center;  
-    align-items: center;       
+    align-items: center;
+        
     width: 90%;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .graph-costrevanue{

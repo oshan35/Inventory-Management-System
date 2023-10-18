@@ -3,90 +3,57 @@ import AdminNavBar from '../../components/admin-components/admin-nav/admin-navba
 import AdminPageHedder from '../../components/admin-components/admin-hedder/adminHedder';
 
 import { Input, Table, Checkbox } from 'antd';
+import { useInventory } from '../../components/InventoryContext';
+import { inventoryDataAPI } from '../../api';
 
 export default function Admin() {
-    const [data, setData] = useState([]);
-    const [checkedKeys, setCheckedKeys] = useState([]);
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [selectedTransaction, setSelectedTransaction] = useState(null);
-
+    const [inventoryData, setinventoryData] = useState([]);
+    const {adminId} = useInventory();
     const columns = [
-        {
-            title: '',
-            dataIndex: 'checkbox',
-            render: (_, record) => (
-                <Checkbox
-                    checked={checkedKeys.includes(record.key)}
-                    onChange={(e) => handleCheck(e, record.key)}
-                />
-            ),
-            width: '5%',
-        },
         {
           title: 'Inventory ID',
           dataIndex: 'inventoryId',
         },
         {
-          title: 'Location',
-          dataIndex: 'location',
+          title: 'Contact No',
+          dataIndex: 'telNo',
         },
         {
-            title: 'Number of Total Items Available',
-            dataIndex: 'availableItems',
+            title: 'Email',
+            dataIndex: 'email',
+        },
+        {
+            title: 'Address',
+            dataIndex: 'address',
+        },
+        {
+            title: 'Maximum Stock Capacity',
+            dataIndex:'maxStockCap',
+        },
+        {
+            title: 'Available Stock',
+            dataIndex:'availableStockQuantity'
+        },
+        {
+            title: 'Employee Count',
+            dataIndex:'noOfEmployee'
         }
     ];
-
-    const handleCheck = (e, key) => {
-        const newCheckedKeys = e.target.checked
-            ? [...checkedKeys, key]
-            : checkedKeys.filter(checkedKey => checkedKey !== key);
-        setCheckedKeys(newCheckedKeys);
-    
-        if (e.target.checked) {
-            const selected = data.find(item => item.key === key);
-            setSelectedTransaction(selected);
-        } else {
-            setSelectedTransaction(null);
+ 
+    useEffect(() => {
+        const fetchInventoryData = async () => {
+            try {
+                const response = await inventoryDataAPI(adminId);
+                if(response.status === 200){
+                    setinventoryData(response.data);
+                }
+            } catch (error) {
+                console.log("Error fetching inventory Data");
+            }
         }
-    };
 
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
-
-    const showModal = () => {
-        setIsModalVisible(true);
-    };
-
-    const handleAdd = () => {
-        showModal();  // Show the modal when the Add button is clicked
-    };
-
-    const handleDelete = () => {
-        // Handle deleting checked transactions
-        // ...
-    };
-
-    const handleUpdate = () => {
-        if (checkedKeys.length === 1) {  // Ensure only one transaction is selected
-            setIsModalVisible(true);
-        } else {
-            alert('Please select exactly one transaction to update.');
-        }
-    };
-
-
-    const handleOk = (form) => {
-        form.validateFields()
-            .then(values => {
-                form.resetFields();
-                console.log('Submitted values:', values);
-                setIsModalVisible(false);
-            })
-            .catch(info => {
-                console.log('Validation Failed:', info);
-            });
-    };
+        fetchInventoryData();
+    },[]);
 
     return (
         <>
@@ -99,7 +66,7 @@ export default function Admin() {
                     <div className="dashboard-content">
                         <div className="row">
                             <div className='data-area'>
-                                    <Table columns={columns} dataSource={data} />
+                                    <Table columns={columns} dataSource={inventoryData} />
                             </div>
                         </div>
                     </div>

@@ -26,11 +26,15 @@ export default function Dashboard() {
                             </div>
                             <div className='cost-revenew'>
                                 <div className="column">
-                                    <div className='col-6'>
-                                        <BestSelledProductChart className="graph"/>
+                                    <div className='graph-card'>
+                                        <div className='col-6'>
+                                            <BestSelledProductChart className="graph"/>
+                                        </div>
                                     </div>
-                                    <div className='col-6'>
-                                        <BestSelledProductChartBar className="graph"/>
+                                    <div className='graph-card'>
+                                        <div className='col-6'>
+                                            <BestSelledProductChartBar className="graph"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
