@@ -67,7 +67,7 @@ const LoginPageEdited = () => {
                         name="inventoryPassword"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
-                        <Input.Password placeholder="Password"/>
+                        <Input.Password placeholder="Password" className='password-field'/>
                     </Form.Item>
 
                     <Form.Item name="remember" valuePropName="checked">

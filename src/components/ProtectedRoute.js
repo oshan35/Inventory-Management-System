@@ -2,7 +2,7 @@ import { Route, Navigate } from 'react-router-dom';
 import { useInventory } from './InventoryContext';
 
 export const ProtectedRoute = ({ children, ...rest }) => {
-  const { inventoryId } = useInventory();
+  const { inventoryId} = useInventory();
 
   if (!inventoryId) {
     return <Navigate to="/" />;
@@ -12,4 +12,12 @@ export const ProtectedRoute = ({ children, ...rest }) => {
 };
 
 
-
+export const AdminProtectedRoute = ({ children, ...rest }) => {
+    const { adminId} = useInventory();
+  
+    if (!adminId) {
+      return <Navigate to="/admin-login" />;
+    }
+  
+    return children;
+  };

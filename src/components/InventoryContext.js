@@ -30,8 +30,16 @@ export const InventoryProvider = ({ children }) => {
         }
     }, [adminId]);
 
+
+    const logout = () => {
+        sessionStorage.removeItem('inventoryId');
+        sessionStorage.removeItem('adminId');
+        setInventoryId(null);
+        setAdminId(null);
+    }
+
     return (
-        <InventoryContext.Provider value={{ inventoryId, setInventoryId, adminId, setAdminId }}>
+        <InventoryContext.Provider value={{ inventoryId, setInventoryId, adminId, setAdminId, logout }}>
             {children}
         </InventoryContext.Provider>
     );

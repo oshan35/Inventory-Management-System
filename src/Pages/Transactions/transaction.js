@@ -153,13 +153,11 @@ export default function TransactionsPage() {
                     </div>
                     <div className="transactions-content">
                         <div className="instructions">
-                                <p>Instructions: Use the search bar to find products by ID.</p>
-                         </div>
+                            <p className='topic'>Transactions</p>
+                        </div>
                         <div className="row">
                             <div className='button-container'>
                                 <Button className='transaction-btn' onClick={handleAdd}>New Transactions</Button>
-                                {/* <Button type='primary' className='transaction-btn' id="delete" onClick={handleDelete}>Delete Transactions</Button>
-                                <Button className='transaction-btn' onClick={handleUpdate}>Update Transactions</Button> */}
                             </div>
                             <div className='data-area'>
                                 <Table columns={columns} dataSource={data} />
@@ -174,7 +172,6 @@ export default function TransactionsPage() {
                 handleCancel={handleCancel}
                 transaction={selectedTransaction}
             />
-
         </>
     );
 }

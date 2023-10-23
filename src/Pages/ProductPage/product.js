@@ -194,7 +194,7 @@ export default function ProductsPage() {
                     </div>
                     <div className="transactions-content">
                         <div className="instructions">
-                                <p>You can select product by checking the tick box.</p>
+                                <p className='topic'>Available Products</p>
                         </div>
                         <div className="row">
                             <div className='button-container'>

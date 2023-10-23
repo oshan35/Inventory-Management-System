@@ -9,6 +9,15 @@
     align-self: stretch;
 }
 
+.password-field{
+    height: 50px;
+}
+
+#basic_inventoryPassword{
+    height: 40px;
+}
+
+
 .LoginDetails{
     display: flex;
     height: 100%;

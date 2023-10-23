@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import {LogoutOutlined} from '@ant-design/icons';
+import { useInventory } from '../../InventoryContext';
 import './adminHedder.css'
 
 const AdminPageHedder = () => {
+    const {logout} = useInventory();
+
     return(
         <>
             <div className='hedder'>
@@ -15,6 +19,9 @@ const AdminPageHedder = () => {
                 </div>
                 <div className='name'>
                     <span className='company-name'>InventoSync Admin Panal</span>
+                </div>
+                <div className='logout-container'>
+                    <button className='logout-button' onClick={logout}><LogoutOutlined /> Logout</button>
                 </div>
             </div>
         </>

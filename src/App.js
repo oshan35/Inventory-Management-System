@@ -13,7 +13,7 @@ import LoginPageEdited from './Pages/LoginPage/loginTest';
 import Admin from './Pages/AdminPage/admin';
 import AdminLogin from './Pages/AdminPage/AdminLogin/adminLogin';
 import AddInventory from './Pages/AdminPage/AddInventoryPage/addInventory';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import { ProtectedRoute,AdminProtectedRoute } from './components/ProtectedRoute';
 import { InventoryProvider } from './components/InventoryContext';
 
 function App() {
@@ -30,8 +30,8 @@ function App() {
               </Routes>
               <Routes>
                 <Route path='admin-login' index element={<AdminLogin/>}/>
-                <Route path="admin" element={<Admin/>}/>
-                <Route path="add-inventory" element={<AddInventory/>}/>
+                <Route path="admin" element={<AdminProtectedRoute><Admin/></AdminProtectedRoute>}/>
+                <Route path="add-inventory" element={<AdminProtectedRoute><AddInventory/></AdminProtectedRoute>}/>
               </Routes>
         </Router>
     </InventoryProvider>
